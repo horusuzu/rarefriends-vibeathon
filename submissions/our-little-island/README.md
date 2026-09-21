@@ -7,7 +7,7 @@ A cozy, persistent virtual-pet and island-building game where your own Rare Frie
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this submission PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Character Spotlight. Secondary design relevance: Economy Potential. No claim of live token spending or burning.
 - **Play:** [Public playable preview](https://horusuzu.github.io/rare-friends-lost-and-found/)
-- **Source:** [Repository](https://github.com/horusuzu/rare-friends-lost-and-found), [submitted code revision](https://github.com/horusuzu/rare-friends-lost-and-found/tree/222ec58), [game directory](https://github.com/horusuzu/rare-friends-lost-and-found/tree/222ec58/games/lost-and-found).
+- **Source:** [Repository](https://github.com/horusuzu/rare-friends-lost-and-found), [submitted code revision](https://github.com/horusuzu/rare-friends-lost-and-found/tree/654f029), [game directory](https://github.com/horusuzu/rare-friends-lost-and-found/tree/654f029/games/lost-and-found).
 - **Stack:** FriendSDK v0.1.2 with documented companion-preview extensions, React 19, TypeScript, original SVG scenery and Canvas postcards. Built with Codex.
 
 ![The holder's Genesis #597 at home](images/home.png)
@@ -31,9 +31,9 @@ Generations NFTs remain fully playable with fresh ownership and generation check
 
 ![A choice during the shore outing](images/shore.png)
 
-### Controls and Japanese UI guide
+### Controls and language
 
-Click or tap the action cards; keyboard Tab/Enter works for controls. There is no movement joystick or time-sensitive input. The experience is currently Japanese-first.
+Click or tap the action cards; keyboard Tab/Enter works for controls. There is no movement joystick or time-sensitive input. Use **English / 日本語** at the top to switch the interface, dialogue, outings, existing journal entries, postcards and reward explanations. The language is saved with the selected NFT’s care data. Existing names and progress remain unchanged.
 
 | Label | Meaning |
 | --- | --- |
@@ -87,7 +87,7 @@ Node.js 22 or newer:
 ```sh
 git clone https://github.com/horusuzu/rare-friends-lost-and-found.git
 cd rare-friends-lost-and-found
-git checkout 222ec58
+git checkout 654f029
 npm ci
 npm run build
 node scripts/dev-game.mjs dev games/lost-and-found
@@ -95,19 +95,21 @@ node scripts/dev-game.mjs dev games/lost-and-found
 
 Open the printed local URL in a wallet-enabled browser. The same real NFT/network requirements apply locally; no sample identity bypass is shipped.
 
-For the home-screen-capable static package, run `node scripts/build-island-life.mjs ./my-new-release` using a new output directory. See the [game instructions](https://github.com/horusuzu/rare-friends-lost-and-found/blob/222ec58/games/lost-and-found/README.md).
+For the home-screen-capable static package, run `node scripts/build-island-life.mjs ./my-new-release` using a new output directory. See the [game instructions](https://github.com/horusuzu/rare-friends-lost-and-found/blob/654f029/games/lost-and-found/README.md).
 
 ## Validation and limitations
+
+English/Japanese switching, translated old memories, English outing/postcard/settings journeys, locale persistence after reload, and returning to Japanese were additionally tested at both viewport sizes.
 
 - SDK build, SDK/game typechecks, game validation and desktop/mobile browser journeys pass. Automated browser tests use isolated wallet/RPC fixtures; these are never published as playable identities.
 - At 390 × 844 and 1100 × 900, tests cover care, outing choices, return, postcards, construction, sleep, harvest, naming, save/reload and simulated cosmetic purchase.
 - Genesis tests cover picker selection, canonical portrait, separate saves, switching collections, network changes, and rejecting ownership transferred after discovery. Read-only reward tests cover correct collections, wallet balances versus claimable amounts, stale errors and refreshes.
 - Identity/art/reward reader tests enforce at least 80% coverage; measured 100% lines/functions and 98.67% branches. Independent review checked ownership boundaries and collection isolation.
 - Direct live read verified Genesis #597 ownership, canonical portrait, active position and real rewards. The holder also played with their own wallet and supplied the screenshots above. No signatures or transfers were performed.
-- Public GitHub Pages assets were checked against the tested build. [Detailed validation record](https://github.com/horusuzu/rare-friends-lost-and-found/blob/222ec58/games/lost-and-found/VALIDATION.md).
+- Public GitHub Pages assets were checked against the tested build. [Detailed validation record](https://github.com/horusuzu/rare-friends-lost-and-found/blob/654f029/games/lost-and-found/VALIDATION.md).
 
-Progress is local to the browser and NFT wallet, with no cloud sync or multiplayer. Clearing browser data removes progress. Home-screen installation is supported by web-app metadata, but the browser context still needs an injected wallet and online ownership verification; no mobile wallet relay or guaranteed offline play is provided. Physical iPhone/PWA wallet compatibility has not been comprehensively tested. The interface is Japanese-first. Public RPC failures can temporarily block connection or reward reads; errors and retry controls are visible.
+Progress is local to the browser and NFT wallet, with no cloud sync or multiplayer. Clearing browser data removes progress. Home-screen installation is supported by web-app metadata, but the browser context still needs an injected wallet and online ownership verification; no mobile wallet relay or guaranteed offline play is provided. Physical iPhone/PWA wallet compatibility has not been comprehensively tested. English and Japanese are supported. Public RPC failures can temporarily block connection or reward reads; errors and retry controls are visible.
 
 ## Credits
 
-FriendSDK code is Apache-2.0; canonical Rare Friends artwork follows the project's [NOTICE](https://github.com/horusuzu/rare-friends-lost-and-found/blob/222ec58/NOTICE.md). Rooms, island scenery, stories, app icon and postcard layouts are original project assets. System emoji are used for some activity icons. No proprietary characters, logos or artwork from other virtual-pet or life-simulation games are included.
+FriendSDK code is Apache-2.0; canonical Rare Friends artwork follows the project's [NOTICE](https://github.com/horusuzu/rare-friends-lost-and-found/blob/654f029/NOTICE.md). Rooms, island scenery, stories, app icon and postcard layouts are original project assets. System emoji are used for some activity icons. No proprietary characters, logos or artwork from other virtual-pet or life-simulation games are included.
