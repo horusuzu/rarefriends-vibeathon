@@ -7,7 +7,7 @@ A mobile-friendly merge-drop puzzle where two of a kind grow into the next orb, 
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Character Spotlight.
 - **Play:** [Rare Drop](https://horusuzu.github.io/rare-friends-lost-and-found/drop/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ac27212bb5cddf6b08d93ccc8ae258e97f894592/games/rare-drop). The source repository also contains Our Little Island and Rare Invaders; Rare Drop is a separate entry and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/91c5bc0843d9e164b610472bde98f381f8d2ec42/games/rare-drop). The source repository also contains Our Little Island and Rare Invaders; Rare Drop is a separate entry and URL.
 - **Stack:** FriendSDK v0.1.2 with documented preview extensions, React, TypeScript and Canvas, with a small deterministic circle-physics engine written for this game. Built with Claude Code.
 
 ![Phone gameplay, automated fixture Friend #7730](images/mobile.png)
@@ -60,12 +60,12 @@ For static hosting, run `node scripts/dev-game.mjs build games/rare-drop --outdi
 
 ## Checks and limitations
 
-Validated source revision: [`ac27212`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ac27212bb5cddf6b08d93ccc8ae258e97f894592). All checks below passed before submission. Engine coverage: 100% lines/functions, 97.83% branches. Automated browser checks use SDK wallet/RPC fixtures; screenshots show fixture Friend #7730, not a claim of ownership.
+Validated source revision: [`91c5bc0`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/91c5bc0843d9e164b610472bde98f381f8d2ec42). All checks below passed before submission. Engine coverage: 100% lines/functions, 97.83% branches. Automated browser checks use SDK wallet/RPC fixtures; screenshots show fixture Friend #7730, not a claim of ownership.
 
 - Engine tests (9) cover deterministic piece generation, aim clamping, drop cooldown, falling to rest, single merges and three-in-a-row, non-merging separation, the Friend-orb bonus, a 45-drop pile staying inside the jar with bounded speeds, and the two-second danger rule.
 - Browser checks at 320×568, 390×844, 844×390, 960×640 and 1100×900 cover start, pause/resume, tap-to-drop, button and keyboard drops, a full run to the result screen, the X draft text and fixed URL, an intercepted composer, retry in English, separation of game and wallet controls, and horizontal overflow.
 - Genesis #597 selection, launch and rejection after an ownership transfer pass at 390 and 1100 px.
-- Repository `npm test` (143 pass, 0 fail, 2 skipped), typecheck, SDK game validation for every game, and the existing Rare Invaders mobile/share browser check all pass with the shared score-share change.
+- Repository `npm test` (145 pass, 0 fail, 2 skipped), typecheck, SDK game validation for every game, and the existing Rare Invaders mobile/share browser check all pass with the shared score-share change.
 
 Best scores are local to the browser and NFT session. No online leaderboard or anti-cheat. X login and final posting are handled by X; automated tests never publish a post. Mobile wallet availability depends on the browser; standalone Safari/Chrome without an injected wallet cannot connect. Browser tests emulate device sizes; they are not physical iOS/Android certification. Play with a real wallet on the public URL has not yet been confirmed by the holder for this entry; the published page was checked to load and show the ownership gate.
 
