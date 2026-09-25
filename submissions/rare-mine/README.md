@@ -10,7 +10,7 @@ Rare Friends NFTs earn RF over time. Rare Mine turns that accrual into a mine yo
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Mine](https://horusuzu.github.io/rare-friends-lost-and-found/mine/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/57da00e304034e09105c43d8019e95a921b7bd8b/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/d5e35cff9a88239beabef55e415bcf97700ca280/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2, React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code. SDK parts used:
   - the host and its eligibility check;
   - the canonical sprite reader;
@@ -137,7 +137,9 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-Validated source revision: [`57da00e`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/57da00e304034e09105c43d8019e95a921b7bd8b); the repository's GitHub Actions checks pass on it.
+**Updated 2026-09-26.** The linked revision (`d5e35cf`) adds phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices).
+
+Validated source revision: [`d5e35cf`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/d5e35cff9a88239beabef55e415bcf97700ca280); the repository's GitHub Actions checks pass on it.
 
 - **Engine and show tests:** 74 pass (56 engine tests plus the reach plan, cue timelines and sound routing). They cover:
   - rate estimation, interpolation clamp and easing, claim/reset;
