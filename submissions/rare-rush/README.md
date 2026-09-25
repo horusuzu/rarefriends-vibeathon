@@ -7,7 +7,7 @@ A one-button, first-person thrill-coaster run. Your Rare Friend rides the front 
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Character Spotlight.
 - **Play:** [Rare Rush](https://horusuzu.github.io/rare-friends-lost-and-found/rush/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/50309ddedc2091a68ff03f1ae5ccc70f2001447d/games/rare-rush). The source repository also contains Our Little Island, Rare Invaders and Rare Drop; Rare Rush is a separate entry and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/166555d01dcc05a6cb2b9443145e8808da3efd67/games/rare-rush). The source repository also contains Our Little Island, Rare Invaders and Rare Drop; Rare Rush is a separate entry and URL.
 - **Stack:** FriendSDK v0.1.2 with documented preview extensions, React, TypeScript and Canvas, with a small deterministic coaster engine and a first-person projection renderer written for this game. Built with Claude Code.
 
 ![Phone, first-person view with a turbo capsule collected, automated fixture Friend #7730](images/mobile.png)
@@ -63,7 +63,9 @@ For static hosting, run `node scripts/dev-game.mjs build games/rare-rush --outdi
 
 ## Checks and limitations
 
-Validated source revision: [`50309dd`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/50309ddedc2091a68ff03f1ae5ccc70f2001447d); the repository's GitHub Actions checks pass on it. Engine coverage: 100% lines/functions, 98.5% branches. Automated browser checks use SDK wallet/RPC fixtures; screenshots show fixture Friend #7730, not a claim of ownership.
+**Updated 2026-09-26.** The linked revision (`166555d`) adds synthesised sound effects with a saved ♪ on/off toggle (M key), a 20-second limit with a Retry button when Friend loading stalls on a slow public RPC and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices).
+
+Validated source revision: [`166555d`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/166555d01dcc05a6cb2b9443145e8808da3efd67); the repository's GitHub Actions checks pass on it. Engine coverage: 100% lines/functions, 98.5% branches. Automated browser checks use SDK wallet/RPC fixtures; screenshots show fixture Friend #7730, not a claim of ownership.
 
 - Engine tests (13) cover the deterministic smooth track and the 79 m crest, launch pressure and perfect launch, gravity with dive, the chain lift, take-off and landing grades (including that brief crest skims are not graded), sparks, boost gates, turbo capsules and firing, the speed caps, checkpoints, time-out and Scream Mode.
 - Browser checks at 320×568, 390×844, 844×390, 960×640 and 1100×900 cover boarding, charging and releasing the launch, riding with holds, firing turbo, pausing (the ride freezes), mute, a full run to the result screen, the X draft and fixed URL, an intercepted composer, riding again in English, control placement above the host toolbar and overflow.
