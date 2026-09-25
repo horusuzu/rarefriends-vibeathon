@@ -10,7 +10,7 @@ Rare Friends NFTs earn RF over time. Rare Mine turns that accrual into a mine yo
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Mine](https://horusuzu.github.io/rare-friends-lost-and-found/mine/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/e395ca01d2943e73e2f3b3d6ce23a2f524bcb0a6/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/57da00e304034e09105c43d8019e95a921b7bd8b/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2, React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code. SDK parts used:
   - the host and its eligibility check;
   - the canonical sprite reader;
@@ -61,6 +61,34 @@ Measured on mainnet today:
 
 ![A lost bet burning the pot, desktop](images/burn.png)
 
+## Pachinko-style bet show
+
+The bet's presentation is pure spectacle on top of an outcome the engine fixed at confirmation. The show receives the result as an input, so it cannot draw, change or delay it; the odds shown before staking never change.
+
+- **Reach (リーチ).** The mine dims, spotlights sweep and three reels spin: coin, gem and your own Friend.
+  - Two reels stop matching, then 「リーチ！」 is called with a rising siren, an accelerating heartbeat and a flashing border.
+  - Some reaches escalate to 「激アツ！」 or 「超激アツ」 (rainbow), and some hang on a near miss.
+  - Like a pachinko 信頼度, hotter tiers are more common before a win. The result is already fixed.
+  - It lasts 2.6–3.95 s; tap to skip.
+- **Win (大当たり).**
+  - **On screen:** a single white flash, rotating gold light rays, confetti and a 「大当たり！ JACKPOT ×2」 banner.
+  - **Coin torrent:** coins pour into the cart while the pot rolls up.
+  - **Streaks:** ×4 「連チャン！」, ×8 「確変突入！」 with a rainbow wash, and ×16 and up **FEVER**.
+  - **Sound:** a sub-bass hit, an original square/saw fanfare that climbs with each tier, a bell cascade, a 2–3 s 「ジャラジャラ」 coin pour, and a fever loop.
+- **Lose (バーン).**
+  - **On screen:** the last reel slides off with a clunk, a beat of silence, one dim orange flash and a short shake. Then the cart bursts into flame with embers, charred coins and smoke under 「🔥 N バーン」.
+  - **Sound:** a boom and whoosh, a descending wah-wah brass, coin clatter and crackling embers.
+- **Comfort.**
+  - At most one full flash per celebration; no strobing and no red flashes.
+  - Particles are capped.
+  - Reduced motion gives a 0.3 s static reveal and still result cards.
+  - ♪ / M mute everything.
+  - Pause, page hide and a new bet stop the show at once.
+
+![Jackpot celebration, phone](images/jackpot.png)
+
+![Burn after a lost bet, phone](images/burn-phone.png)
+
 ## What is real and what is simulated
 
 - **Real:** the unclaimed RF/WETH amounts and their accrual rate. Read-only; no transaction or signature.
@@ -109,9 +137,9 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-Validated source revision: [`e395ca0`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/e395ca01d2943e73e2f3b3d6ce23a2f524bcb0a6).
+Validated source revision: [`57da00e`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/57da00e304034e09105c43d8019e95a921b7bd8b); the repository's GitHub Actions checks pass on it.
 
-- **Engine tests:** 56 pass. They cover:
+- **Engine and show tests:** 74 pass (56 engine tests plus the reach plan, cue timelines and sound routing). They cover:
   - rate estimation, interpolation clamp and easing, claim/reset;
   - the baseline/pot/streak math and the ledger identities;
   - the mode decision, 45 % convergence, EV and burn;
