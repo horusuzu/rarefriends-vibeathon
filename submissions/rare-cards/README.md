@@ -7,7 +7,7 @@ A trading-card game for Rare Friends holders. Packs turn your own Friend into ca
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Cards](https://horusuzu.github.io/rare-friends-lost-and-found/stickers/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ca174019b4d0164baa2d193392aed34bdd7138c3/games/rare-stickers). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/9106cd3d619568c3e90a40f00ea1d542095147ca/games/rare-stickers). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2 (chance-game client for RF tickets) with documented preview extensions, React, TypeScript and Canvas. Built with Claude Code.
 
 ![Binder with five cards, phone, automated fixture Friend #7730](images/binder.png)
@@ -59,7 +59,9 @@ node scripts/dev-game.mjs dev games/rare-stickers
 
 ## Checks and limitations
 
-Validated source revision: [`ca17401`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ca174019b4d0164baa2d193392aed34bdd7138c3); the repository's GitHub Actions checks pass on it.
+**Updated 2026-09-26.** The linked revision (`9106cd3`) adds synthesised sound effects with a saved ♪ on/off toggle (M key), a 20-second limit with a Retry button when Friend loading stalls on a slow public RPC and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The Cards browser check that drives the host's RF confirmations currently fails in the test harness, including on the originally submitted revision; the RF pack purchase and reveal were verified by hand on the public page.
+
+Validated source revision: [`9106cd3`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/9106cd3d619568c3e90a40f00ea1d542095147ca); the repository's GitHub Actions checks pass on it.
 
 - 11 unit tests (packs and odds, trade/battle code round-trips and typo rejection, stats, element triangle, deterministic best-of-five battles with side-swap mirroring, battle record, challenges, saves under 32 KB); 100 % line coverage of the card and book modules.
 - Browser checks at 320×568, 390×844, 844×390, 960×640 and 1100×900: three free packs, two RF packs through host confirmations (4 RF spent), binder pockets, keyboard card view, trade code, deck picking, issuing a challenge (2 RF burned), answering a rival challenge with replay and reply code (4 RF burned), refusing a second answer and self-answers, settling a reply without extra burn, language switch and overflow.
