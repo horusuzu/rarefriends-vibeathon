@@ -1,106 +1,101 @@
 # Rare Mine / レアマイン
 
-**Mine coins you can hear. Then withdraw them, or bet the pot: 45 % to double it, or it all burns.**
+**Watch your NFT's real RF rewards pile up as mining, hear every coin, then withdraw or bet the pot: 45 % to double it, or it all burns.**
 
-An original idle-and-tap mining game. Your verified Rare Friends NFT swings a pickaxe in a lantern-lit mine shaft. Every strike throws sparks and pops coins that arc into a cart with layered, pitch-varied clinks that get richer as the pile grows. When the pot looks good, choose **Withdraw** (safe forever) or **Bet** the whole pot on a 45 % chance to double it. Lose, and the stake is **burned**.
+Rare Friends NFTs earn RF over time. Rare Mine turns that accrual into a mine you can watch and hear:
+- **Your coins:** your verified Friend swings a pickaxe, and coins arc into a cart at the pace your NFT **actually** earns.
+- **The counter:** the pot shows the real unclaimed RF, read live and read-only from the Rare Friends activation manager, and ticks up between reads.
+- **The choice:** when the pot looks good, choose **Withdraw** or **Bet** the whole pot on a 45 % chance to double it. Lose, and the stake is **burned**.
 
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Mine](https://horusuzu.github.io/rare-friends-lost-and-found/mine/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/c8585fa98f386a1a0bae313fdfe3ef5d12e2e9bf/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
-- **Stack:** FriendSDK v0.1.2 (host, eligibility, canonical sprite reader, `saveLocal`, trusted score-share bridge), React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/e395ca01d2943e73e2f3b3d6ce23a2f524bcb0a6/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Stack:** FriendSDK v0.1.2, React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code. SDK parts used:
+  - the host and its eligibility check;
+  - the canonical sprite reader;
+  - the read-only `readRewards`;
+  - `saveLocal`;
+  - the trusted score-share bridge.
 
-![Mining with a combo, phone](images/mining.png)
+![Live public page with Genesis #597: 42,603 RF unclaimed, rising at +16.7 RF/min](images/real-genesis.png)
 
-## Mining
+## Real rewards, visualised
 
-| Rule | Value |
-| --- | --- |
-| Automatic strike | every 1.0 s |
-| Tap / Space / Enter | an extra strike; combo +1 per tap (max 12) speeds auto-mining up to 0.4 s |
-| Coins per strike | 1–3 |
-| Gold vein | 3 % of strikes, +12–30 |
-| Gem | 0.8 % of strikes, +60–120, with a flash |
-| Rock face | breaks every 8 strikes for +5 |
+- **Read:** the trusted host's read-only `client.readRewards()` returns the selected NFT's claimable RF and WETH (`earned()` on the activation manager, read at a fresh block after re-verifying ownership). The game polls it about every 20 s, never overlapping, pausing while hidden or paused, and backing off on errors.
+- **Rate:** the accrual rate comes from successive reads. Between reads the odometer interpolates (`last + rate × elapsed`, never more than 30 s ahead) and eases to each new true value. A rate badge shows it, e.g. **+16.7 RF/分**.
+- **Coins:** each coin is worth the smallest 1-2-5 step that keeps coins at 6 per second or fewer. That gives 2.4–6 coins a second at any real rate:
 
-Expected yield is 3.975 coins per strike. Coins per minute:
+  | NFT | Accrual | Coin value | Coins per second |
+  |---|---|---|---|
+  | Genesis #597 | 16.4 RF/min | 0.05 RF | about 5.5 |
+  | Friend #7730 | 0.2 RF/min | 0.001 RF | about 3.3 |
 
-| Play style | Coins per minute |
-| --- | --- |
-| Idle | about 240 |
-| Tapping 3 times a second | about 1 300 |
-| Tapping 6 times a second | about 2 000 |
+  The cart and jar fill with the pot.
+- **Taps are cosmetic:** tapping the rock gives strikes, combos and clinks for fun but cannot create RF (「タップは演出です」).
+- **Claims:** if the real amount drops because the holder claimed on the official site, the pot resets cleanly.
+- **Practice mode:** used when the NFT is not activated or earns nothing, or when reads keep failing. The notice reads 「このFriendには報酬がたまっていません。アクティベートは公式サイトで。」. Simulated idle/tap mining is offered as 練習モード, with a button to re-read the real rewards.
 
-The first choice arrives after about 40 s.
+Measured on mainnet today:
 
-## Withdraw or bet
+| NFT | Unclaimed RF | Accrual |
+|---|---|---|
+| Genesis #597 | ≈ 42 600 | ≈ 16.7 RF/min |
+| Friend #7730 | ≈ 38 | ≈ 0.2 RF/min |
 
-Both buttons are the same size and always on screen; Withdraw is never hidden.
+![Real-reward mode with the fixture Friend, phone](images/mining.png)
 
-- **Withdraw (引き出す):** the pot moves to the safe balance with a coin rain and a cash-register "cha-ching".
-- **Bet (倍かけ):**
-  - **Before anything is staked**, the screen shows 「勝率45%・勝てば2倍・負ければ全額バーン」 with the exact stake, win and burn amounts.
-  - **Win:** the pot doubles and stays at risk. Bet again for a streak (×2, ×4, ×8 …, capped at 20 wins) or withdraw.
-  - **Lose:** the whole stake burns ("🔥 N burned") and the burned total grows.
-  - **When the result is fixed:** it is drawn when you confirm and saved already settled. The 1.6 s drum-roll only delays the reveal, so reloading cannot undo a burn.
+## Withdraw or bet the real accrual
 
-![Odds shown before the stake, phone](images/bet.png)
+- **Pot:** `pot = (real unclaimed RF − baseline) + streak bonus`. The first-ever baseline is 0, so the first pot is everything the NFT has accrued.
+- **Withdraw (記録して引き出す):** records the pot and moves the baseline to the current real amount. Real claiming stays on the official site (rarefriends.com/portfolio, shown as text).
+- **Bet (倍かけ):** the odds, stake, win and burn amounts are shown **before** staking: 「勝率45%・勝てば2倍・負ければ全額バーン」.
+  - **Win:** the stake becomes a streak bonus, so the pot doubles and keeps growing with real accrual. Bet again (×2, ×4, ×8 …, capped at 20 wins) or withdraw.
+  - **Lose:** the whole pot burns and the baseline moves to the current real amount.
+  - The result is fixed at confirmation and saved settled, so reloading cannot undo it.
+- **Odds:** P(win) = 0.45 with a ×2 payout, so **EV = 0.9 × stake**: on average **10 % of every bet burns**, and a lost streak burns the whole pot. Measured win rate: 44.9 % over 100 000 bets.
+- **Stats:** unclaimed real RF, rate, withdrawn, **burned**, best streak and wins/losses.
+- **Share on X:** posts the burned total and best streak through the host's trusted share bridge.
 
-### Odds and burn
-
-- P(win) = 0.45 and the payout is ×2, so **EV = 0.9 × stake**: on average **10 % of every bet burns**.
-- Measured over 100 000 bets: 44.9 % wins.
-- A ×16 streak (4 wins in a row) happens 4.1 % of the time.
-- The stats panel shows the safe balance, total mined, withdrawn, **burned**, best streak and bets won/lost. Two ledger identities are checked on every save load:
-  - `mined + winnings = withdrawn + burned + pot`
-  - `staked = winnings + burned`
-
-**Share on X** posts the burned total and best streak (e.g. 「🔥1200 RF（プレビュー）をバーン！ 最高×16（4連勝）」) through the SDK host's trusted share bridge. The host fixes the title and URL.
+![Odds before staking, phone](images/bet.png)
 
 ![A lost bet burning the pot, desktop](images/burn.png)
 
-## Economy: simulated, and what live play needs
+## What is real and what is simulated
 
-**No real RF moves in this preview.** Mined coins are "RF (preview)", a simulated currency with no value that cannot be redeemed. It is labelled 「シミュレーション・本物のRFではありません」 on the title, the mine, the stats and the footer. The bet is resolved by a seeded local RNG; the game never calls the SDK's buy, play, settle or redeem, and the `game.json` chance-game block is an unused placeholder.
+- **Real:** the unclaimed RF/WETH amounts and their accrual rate. Read-only; no transaction or signature.
+- **Simulated:** the bet, the win and the burn. Every screen says 「賭け・バーンはシミュレーション。本物のRFは動かず、燃えません」. Real rewards are never moved or burned.
+- **Not used:** the game never calls the SDK's buy, play, settle or redeem, and opens no links or popups. The `game.json` chance-game block is an unused placeholder.
 
-The SDK v0.1.2 chance-game API cannot express this bet. A live version needs a Rare Friends contract with:
-- a **variable stake** (the whole pot) paid in RF from the canonical NFT wallet with an exact approval;
-- a verifiable 45 % oracle roll, settled on-chain before any reveal;
-- a **2× payout from a reserved bankroll**, so every open bet's maximum prize is backed;
-- a **burn of lost stakes**;
-- mining that either stays off-chain and unbacked, or is replaced by an RF deposit, since free mined coins cannot become real RF.
+To bet the real accrual live, Rare Friends would need:
+- the rewards claimed to the canonical NFT wallet;
+- a bet contract with a **variable stake** in RF from that wallet (exact approval);
+- a verifiable **45 % oracle roll** settled before any reveal;
+- a **2× payout from a reserved bankroll**;
+- a **burn of lost stakes**.
 
-With those, each bet burns 10 % of the stake on average, and every lost streak burns the whole pot.
+With that, each bet burns 10 % of the stake on average and every lost streak burns the whole pot. That is the RF sink this entry proposes for Token Activity.
 
-## Sound
+![Practice mode for an NFT that has not been activated, phone](images/practice.png)
 
-- **Synthesised:** WebAudio only, no audio files.
-- **Coin clinks:** inharmonic metal partials with a soft attack and random pitch and pan, richer as the pile grows.
-- **Other cues:** a pick "tock", rock crumble, vein sparkle, gem chime, the withdraw "cha-ching", a drum roll for a bet, a win fanfare, and a burn whoosh and crackle.
-- **Comfort:** cues are rate-limited, capped and compressed so long sessions stay pleasant.
-- **♪ on/off** (`aria-pressed`, or **M**) is saved.
+## Sound and controls
 
-## Controls
-
-| Action | Touch | Keyboard |
-| --- | --- | --- |
-| Extra strike | tap the mine | Space, Enter |
-| Withdraw / open the bet | 引き出す / 倍かけ | W / B |
-| Confirm / cancel the bet | かける / やめる | Y / N, Esc |
-| Sound on/off, pause | ♪, Ⅱ | M, P |
-
-Japanese is the default, with an English toggle. Other support:
-- reduced motion: fewer coins; no sparks, shake or flash; a 0.3 s reveal;
-- controls of at least 44 px;
-- results announced with `role="status"`.
-
-![Title, phone](images/title.png)
+- **Sound:** WebAudio synthesis only.
+  - Layered, pitch-varied coin clinks that get richer as the pile grows.
+  - A pick "tock", a withdraw "cha-ching", a drum roll for the bet, a win fanfare, and a burn whoosh and crackle.
+  - **♪ on/off** (or M) is saved.
+- **Controls:**
+  - tap or Space for strikes;
+  - W withdraws, B opens the bet;
+  - Y/N confirm or cancel;
+  - P pauses.
+- **Language and access:** Japanese by default with an English toggle. Reduced motion, controls of at least 44 px, and results announced with `role="status"`.
 
 ## Try it
 
 1. Open the preview on Robinhood mainnet, **chain 4663**, in a browser with an injected wallet or a mobile wallet's in-app browser.
 2. Choose an owned hardwired **Generations NFT (generation 1+)** or the configured **Genesis #597**. The trusted host checks current ownership.
-3. No RF, activation or signature is needed. If the public RPC stalls while Friends load, the host stops after 20 seconds and offers a retry.
+3. An activated NFT shows its real unclaimed RF; one that is not activated opens practice mode. No RF, activation or signature is needed to play.
 
 ## Run locally
 
@@ -114,23 +109,30 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-Validated source revision: [`c8585fa`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/c8585fa98f386a1a0bae313fdfe3ef5d12e2e9bf); the repository's GitHub Actions checks pass on it.
+Validated source revision: [`e395ca0`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/e395ca01d2943e73e2f3b3d6ce23a2f524bcb0a6).
 
-- **Engine tests:** 31 pass. They cover:
-  - the win rate converging to 45 % across seeds, EV 0.9×, the ×2 payout and burn, streak doubling and the cap;
-  - withdraw, the ledger identities and mining events;
-  - save round-trip, tamper rejection and the saved sound setting.
-- **Browser checks** pass at 320×568, 390×844, 844×390, 960×640 and 1100×900:
-  - the flow: mining, tap combo, withdraw, odds dialog, bets until both a win and a loss happen (each result predicted from the seed with the engine and matched against the UI), streak, burn stats;
-  - the ♪ toggle, pause, language, reload persistence and overflow.
-- **Genesis #597:** selection and play pass at 390 and 1100 px.
-- **Repository:** tests (148 pass, 0 fail, 2 skipped), typecheck and SDK game validation pass. The new share row has its own test.
+- **Engine tests:** 56 pass. They cover:
+  - rate estimation, interpolation clamp and easing, claim/reset;
+  - the baseline/pot/streak math and the ledger identities;
+  - the mode decision, 45 % convergence, EV and burn;
+  - saves (v1 → v2 migration, tamper rejection, the sound setting).
+- **Browser checks** pass at 320×568, 390×844, 844×390, 960×640 and 1100×900 for both real mode and practice mode, over a growing `readRewards` fixture. Real mode checks:
+  - the rate badge and the odometer rising between reads;
+  - withdraw and a lost bet moving the baseline, and the pot identity;
+  - the labels, and no links;
+  - ♪ and M;
+  - reload persistence;
+  - practice mode for a Friend that is not activated, and switching back to real after re-reading.
+- **Genesis #597:** passes at 390 and 1100 px.
+- **Repository:** tests (148 pass, 0 fail, 2 skipped), typecheck and SDK game validation pass.
+- **Live check:** the public page, driven headlessly with the holder's own address (read-only; no signature), showed Genesis #597's real unclaimed RF rising from 42 596 to 42 603 RF over 26 s at +16.7 RF/min.
 
 Known limits:
-- The preview's bet stream is seeded, so someone reading the page with developer tools can foresee the next bet. That only matters in a simulation; live randomness must come from the on-chain oracle.
-- Saves are local to the browser and NFT session.
-- The synthesised sound has not been checked by ear on physical devices.
-- Real-wallet play is not claimed.
+- Any drop in the real amount is treated as a claim on the official site.
+- An NFT whose reads do not grow is treated as not accruing.
+- The preview's bet stream is seeded, so it can be foreseen with developer tools. Live randomness must be on-chain.
+- Saves are local to the browser.
+- The sound has not been checked by ear on physical devices.
 
 The Genesis preview is a fork addition for review, not an upstream SDK capability or Rare Friends production approval. This entry is separate from Our Little Island (#20), Rare Invaders (#40), Rare Drop (#48), Rare Rush (#52), Rare Cards (#55), Rare Quest (#56) and Rare Delve (#60).
 
