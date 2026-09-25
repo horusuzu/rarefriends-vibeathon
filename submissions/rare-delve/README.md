@@ -7,7 +7,7 @@ An original turn-based roguelike. Your verified Rare Friends NFT is the shopkeep
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Economy Potential.
 - **Play:** [Rare Delve](https://horusuzu.github.io/rare-friends-lost-and-found/delve/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ef11c6e3da160c029339b93685a4d22408b05342/games/rare-delve). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ff22fc29c3cdd8f8f24c23eb7391a02be06f78d9/games/rare-delve). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2 (host, eligibility, canonical sprite reader, `saveLocal`), React, TypeScript and a deterministic engine rendered to a scrolling canvas. Built with Claude Code.
 
 ![Floor 1 with the Friend in a lit room, desktop](images/dungeon.png)
@@ -78,7 +78,9 @@ node scripts/dev-game.mjs dev games/rare-delve
 
 ## Checks and limitations
 
-Validated source revision: [`ef11c6e`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ef11c6e3da160c029339b93685a4d22408b05342); the repository's GitHub Actions checks pass on it.
+**Updated 2026-09-26.** The linked revision (`ff22fc2`) adds phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices).
+
+Validated source revision: [`ff22fc2`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/ff22fc29c3cdd8f8f24c23eb7391a02be06f78d9); the repository's GitHub Actions checks pass on it.
 
 - **Engine tests:** 65 pass. They cover:
   - floor generation and reachability, 8-way movement and corners, fog;
