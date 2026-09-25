@@ -7,7 +7,7 @@ An original monster-collecting RPG in a four-shade green, 160 × 144 pixel style
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Character Spotlight.
 - **Play:** [Rare Quest](https://horusuzu.github.io/rare-friends-lost-and-found/quest/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/0009766b71cd45f05d3848f90ea4fb2798ee66a8/games/rare-quest). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/0b7a781a4fd5b8a1abfb76b6e33953f9348a13f3/games/rare-quest). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2 (host, eligibility, canonical sprite reader, `saveLocal`), React, TypeScript and a deterministic engine rendered to a 160 × 144 canvas. Built with Claude Code.
 
 ![Title screen starring Friend #7730, phone, automated fixture](images/title.png)
@@ -38,7 +38,7 @@ An original monster-collecting RPG in a four-shade green, 160 × 144 pixel style
 
 ![Party after befriending Polkadrop, phone](images/party.png)
 
-Full formulas (damage, stats, EXP, escape odds, type chart) are in the [game README](https://github.com/horusuzu/rare-friends-lost-and-found/blob/0009766b71cd45f05d3848f90ea4fb2798ee66a8/games/rare-quest/README.md).
+Full formulas (damage, stats, EXP, escape odds, type chart) are in the [game README](https://github.com/horusuzu/rare-friends-lost-and-found/blob/0b7a781a4fd5b8a1abfb76b6e33953f9348a13f3/games/rare-quest/README.md).
 
 ## Controls
 
@@ -72,7 +72,9 @@ node scripts/dev-game.mjs dev games/rare-quest
 
 ## Checks and limitations
 
-Validated source revision: [`0009766`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/0009766b71cd45f05d3848f90ea4fb2798ee66a8); the repository's GitHub Actions checks pass on it.
+**Updated 2026-09-26.** The linked revision (`0b7a781`) adds a 20-second limit with a Retry button when Friend loading stalls on a slow public RPC and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices).
+
+Validated source revision: [`0b7a781`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/0b7a781a4fd5b8a1abfb76b6e33953f9348a13f3); the repository's GitHub Actions checks pass on it.
 
 - 48 engine tests, all passing (maps and collisions, encounters, damage/type/STAB, levelling and move learning, capture, fainting and whiteout, the dojo master's three-monster fight and badge, shop, save validation and round-trips).
 - Browser checks at 320×568, 390×844, 844×390, 960×640 and 1100×900: title and intro, walking into the Sprout Trail, a wild battle won or ended by a Friend Ribbon (a befriended monster must join the party), keyboard menu save, pause, language switch, continuing after reload, touch-target size and overflow.
