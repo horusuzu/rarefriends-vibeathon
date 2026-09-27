@@ -10,7 +10,7 @@ Rare Friends NFTs earn RF over time. Rare Mine turns that accrual into a mine yo
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Mine](https://horusuzu.github.io/rare-friends-lost-and-found/mine/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/a3f8bb43fc637a3eaa94441d2783093291418ec9/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/aef9f35c1334462df779cf0de12b39ad9ed81606/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2, React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code. SDK parts used:
   - the host and its eligibility check;
   - the canonical sprite reader;
@@ -51,6 +51,7 @@ Measured on mainnet today:
 - **Withdraw (記録して引き出す):** records the pot and moves the baseline to the current real amount. Real claiming stays on the official site (rarefriends.com/portfolio, shown as text).
 - **Bet (倍かけ):** the odds, stake, win and burn amounts are shown **before** staking: 「勝率45%・勝てば2倍・負ければ全額バーン」.
   - **Win:** the stake becomes a streak bonus, so the pot doubles and keeps growing with real accrual. Bet again (×2, ×4, ×8 …, capped at 20 wins) or withdraw.
+  - **Double push:** after a win the Bet button reads 「ダブル ×N / 勝率45%・すぐかけ」 and one press (or **B**) stakes the whole pot again at once, with no second dialog, until a bet is lost, the pot is withdrawn or the cap is reached. The first bet of every pot still shows the odds first. Odds and EV are unchanged.
   - **Lose:** the whole pot burns and the baseline moves to the current real amount.
   - The result is fixed at confirmation and saved settled, so reloading cannot undo it.
 - **Odds:** P(win) = 0.45 with a ×2 payout, so **EV = 0.9 × stake**: on average **10 % of every bet burns**, and a lost streak burns the whole pot. Measured win rate: 44.9 % over 100 000 bets.
@@ -148,9 +149,9 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-**Updated 2026-09-27.** The linked revision (`a3f8bb4`) adds a desktop pet (below) and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The pet's browser test replaces `documentPictureInPicture.requestWindow` with a same-origin popup because headless Chromium has no Document Picture-in-Picture; the holder opened the real pet window on desktop and confirmed it appears (2026-09-27).
+**Updated 2026-09-27.** The linked revision (`aef9f35`) adds a double push after a win (see *Withdraw or bet*), a desktop pet (below) and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The pet's browser test replaces `documentPictureInPicture.requestWindow` with a same-origin popup because headless Chromium has no Document Picture-in-Picture; the holder opened the real pet window on desktop and confirmed it appears (2026-09-27).
 
-Validated source revision: [`a3f8bb4`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/a3f8bb43fc637a3eaa94441d2783093291418ec9); the repository's GitHub Actions checks pass on it.
+Validated source revision: [`aef9f35`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/aef9f35c1334462df779cf0de12b39ad9ed81606); the repository's GitHub Actions checks pass on it.
 
 - **Engine and show tests:** 74 pass (56 engine tests plus the reach plan, cue timelines and sound routing). They cover:
   - rate estimation, interpolation clamp and easing, claim/reset;
