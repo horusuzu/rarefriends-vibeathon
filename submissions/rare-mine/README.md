@@ -148,7 +148,7 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-**Updated 2026-09-27.** The linked revision (`a3f8bb4`) adds a desktop pet (below) and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The pet's browser test replaces `documentPictureInPicture.requestWindow` with a same-origin popup because headless Chromium has no Document Picture-in-Picture; the real always-on-top window has not yet been checked by hand.
+**Updated 2026-09-27.** The linked revision (`a3f8bb4`) adds a desktop pet (below) and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The pet's browser test replaces `documentPictureInPicture.requestWindow` with a same-origin popup because headless Chromium has no Document Picture-in-Picture; the holder opened the real pet window on desktop and confirmed it appears (2026-09-27).
 
 Validated source revision: [`a3f8bb4`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/a3f8bb43fc637a3eaa94441d2783093291418ec9); the repository's GitHub Actions checks pass on it.
 
