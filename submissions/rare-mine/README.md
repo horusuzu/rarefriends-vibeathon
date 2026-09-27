@@ -10,7 +10,7 @@ Rare Friends NFTs earn RF over time. Rare Mine turns that accrual into a mine yo
 - **Builder/contact:** [@horusuzu](https://github.com/horusuzu), Genesis #597 holder. Contact through this PR or [source issues](https://github.com/horusuzu/rare-friends-lost-and-found/issues).
 - **Category:** Token Activity.
 - **Play:** [Rare Mine](https://horusuzu.github.io/rare-friends-lost-and-found/mine/)
-- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/d5e35cff9a88239beabef55e415bcf97700ca280/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
+- **Source:** [Game and run instructions](https://github.com/horusuzu/rare-friends-lost-and-found/tree/a3f8bb43fc637a3eaa94441d2783093291418ec9/games/rare-mine). The repository also contains the holder's other entries; this one is a separate game and URL.
 - **Stack:** FriendSDK v0.1.2, React, TypeScript, a deterministic engine and a pixel canvas. Built with Claude Code. SDK parts used:
   - the host and its eligibility check;
   - the canonical sprite reader;
@@ -89,6 +89,17 @@ The bet's presentation is pure spectacle on top of an outcome the engine fixed a
 
 ![Burn after a lost bet, phone](images/burn-phone.png)
 
+## Desktop pet
+
+A **🐾 Pet** toggle in the host toolbar pops your Friend out of the page into a small always-on-top window (Document Picture-in-Picture) that you can park at the edge of your desktop:
+- your Friend swings a pickaxe on a rock ledge while coins arc into a pile, at a rate tied to the real accrual;
+- an odometer shows the NFT's **real unclaimed RF**, read-only, about every 20 s, interpolated between reads, with a live rate badge;
+- an optional soft coin clink (off by default), 「報酬なし」 for Friends that do not accrue, and reduced-motion support.
+
+The pet lives in the trusted host, not in sandboxed game code; only games in a fixed host table (Rare Mine) can show it, and it closes on Friend, account or network change. It sends no transactions. It is offered only where the browser supports Document Picture-in-Picture (desktop Chrome / Edge 116+); elsewhere the toggle is hidden.
+
+![Desktop pet window (2×)](images/pet.png)
+
 ## What is real and what is simulated
 
 - **Real:** the unclaimed RF/WETH amounts and their accrual rate. Read-only; no transaction or signature.
@@ -137,9 +148,9 @@ node scripts/dev-game.mjs dev games/rare-mine
 
 ## Checks and limitations
 
-**Updated 2026-09-26.** The linked revision (`d5e35cf`) adds phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices).
+**Updated 2026-09-27.** The linked revision (`a3f8bb4`) adds a desktop pet (below) and phone layouts (a larger play area, thumb-reach controls, no double-tap zoom, pull-to-refresh or long-press menus during play) to the originally submitted code. The repository's GitHub Actions checks pass on it, and the game's new phone test passes at 360×640, 375×667, 390×664, 430×740 and 664×390 (Chromium phone emulation; not yet on physical devices). The pet's browser test replaces `documentPictureInPicture.requestWindow` with a same-origin popup because headless Chromium has no Document Picture-in-Picture; the real always-on-top window has not yet been checked by hand.
 
-Validated source revision: [`d5e35cf`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/d5e35cff9a88239beabef55e415bcf97700ca280); the repository's GitHub Actions checks pass on it.
+Validated source revision: [`a3f8bb4`](https://github.com/horusuzu/rare-friends-lost-and-found/tree/a3f8bb43fc637a3eaa94441d2783093291418ec9); the repository's GitHub Actions checks pass on it.
 
 - **Engine and show tests:** 74 pass (56 engine tests plus the reach plan, cue timelines and sound routing). They cover:
   - rate estimation, interpolation clamp and easing, claim/reset;
